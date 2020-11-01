@@ -9,7 +9,7 @@ AM_INIT_AUTOMAKE([1.11])
 AM_SILENT_RULES([yes])
 
 AC_PROG_CXX
-
+AC_PROG_LIBTOOL
 
 
 
@@ -20,9 +20,9 @@ AC_PROG_CXX
 LT_INIT
 
 
-PKG_CHECK_MODULES(OCTETOS_DB_ABSTRACT, [octetos-db-abstract])
+PKG_CHECK_MODULES(OCTETOS_DB_ABSTRACT, octetos-db-abstract)
 
-PKG_CHECK_MODULES(OCTETOS_DB_MARIA, [libmariadb])
+PKG_CHECK_MODULES(LIBMARIADB, libmariadb)
 
 
 
@@ -30,5 +30,5 @@ PKG_CHECK_MODULES(OCTETOS_DB_MARIA, [libmariadb])
 AC_OUTPUT([
 Makefile
 src/Makefile
-
+src/octetos-db-maria.pc
 ])
