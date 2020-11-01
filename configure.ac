@@ -1,6 +1,6 @@
 
 
-AC_INIT(octetos-db-maria, 0.1.0-alpha)
+AC_INIT(octetos-db-maria, 1.4.0-alpha)
 
 AC_CONFIG_HEADERS([config.h])
 
