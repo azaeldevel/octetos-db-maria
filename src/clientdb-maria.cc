@@ -1,5 +1,5 @@
 
-#if defined ARCH
+#if defined ARCHLINUX
 	#include <mysql/mysql.h>
 #else
 	#error "Plataforma desconocida."

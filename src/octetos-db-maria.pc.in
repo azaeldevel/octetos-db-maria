@@ -6,7 +6,7 @@ datadir=@datadir@
 includedir=@prefix@/include
 
 Name: octetos-db
-Description: C++ library for Database Access database, MariaDB component.
+Description: C++ library for Database Access, MariaDB component.
 Version: @VERSION@
 Requires: octetos-db-abstract
 Libs: -L${libdir} -loctetos-db-maria

@@ -3,7 +3,14 @@ AUTOMAKE_OPTIONS=foreign 1.4
 
 lib_LTLIBRARIES = liboctetos-db-maria.la
 
-liboctetos_db_maria_la_CFLAGS = $(OCTETOS_DB_ABSTRACT_CFLAGS) $(LIBMARIADB_CFLAGS)
+
+if WITH_ARCHLINUX
+DEFINESO = -DARCHLINUX
+endif
+
+
+
+liboctetos_db_maria_la_CXXFLAGS = $(OCTETOS_DB_ABSTRACT_CFLAGS) $(LIBMARIADB_CFLAGS) $(DEFINESO)
 liboctetos_db_maria_la_LIBADD = $(OCTETOS_DB_ABSTRACT_LIBS) $(LIBMARIADB_LIBS)
 liboctetos_db_maria_la_SOURCES = clientdb-maria.cc
 
