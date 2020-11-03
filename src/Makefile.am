@@ -7,6 +7,9 @@ lib_LTLIBRARIES = liboctetos-db-maria.la
 if WITH_ARCHLINUX
 DEFINESO = -DARCHLINUX
 endif
+if WITH_GENTOO
+DEFINESO = -DLINUX_GENTOO
+endif
 
 
 

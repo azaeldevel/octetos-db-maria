@@ -1,6 +1,8 @@
 
 #if defined ARCHLINUX
 	#include <mysql/mysql.h>
+#elif defined LINUX_GENTOO
+	#include <mysql/mysql.h>
 #else
 	#error "Plataforma desconocida."
 #endif

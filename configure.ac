@@ -1,6 +1,6 @@
 
 
-AC_INIT(octetos-db-maria, 1.4.1-alpha)
+AC_INIT(octetos-db-maria, 1.4.2-alpha)
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -26,11 +26,12 @@ PKG_CHECK_MODULES(LIBMARIADB, libmariadb)
 
 
 
-AC_ARG_WITH([archlinux], AS_HELP_STRING([--with-archlinux], [Activating compilation for archlinux.]))
-if test "x$with_archlinux" = "xyes"; then
-   AM_CONDITIONAL(WITH_ARCHLINUX, test x"$with_archlinux" = "xyes")
-fi
+AC_ARG_WITH([archlinux], AS_HELP_STRING([--with-archlinux], [Activating compilation for ArchLinux.]))
+AM_CONDITIONAL(WITH_ARCHLINUX, test x"$with_archlinux" = "xyes")
 
+
+AC_ARG_WITH([gentoo], AS_HELP_STRING([--with-gentoo], [Activating compilation for Gentoo.]))
+AM_CONDITIONAL(WITH_GENTOO, test x"$with_gentoo" = "xyes")
 
 
 AC_OUTPUT([
