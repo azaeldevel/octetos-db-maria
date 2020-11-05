@@ -1,6 +1,6 @@
 
 
-AC_INIT(octetos-db-maria, 1.4.2-alpha)
+AC_INIT(octetos-db-maria, 1.4.3-alpha)
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -32,6 +32,11 @@ AM_CONDITIONAL(WITH_ARCHLINUX, test x"$with_archlinux" = "xyes")
 
 AC_ARG_WITH([gentoo], AS_HELP_STRING([--with-gentoo], [Activating compilation for Gentoo.]))
 AM_CONDITIONAL(WITH_GENTOO, test x"$with_gentoo" = "xyes")
+
+AC_ARG_WITH([debian], AS_HELP_STRING([--with-debian], [Activating compilation for Debian.]))
+AM_CONDITIONAL(WITH_DEBIAN, test x"$with_debian" = "xyes")
+
+
 
 
 AC_OUTPUT([
