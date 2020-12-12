@@ -383,8 +383,7 @@ namespace mariadb
 			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
 			msg = msg + "' ";
 			msg = msg + mysql_error((MYSQL*)conn);  
-			core::Error::write(SQLException(msg)); 
-			return false;
+			throw SQLException(msg); 
 		}
 		MYSQL_RES *result = mysql_store_result((MYSQL*)conn);
 		if (result == NULL && mysql_errno((MYSQL*)conn) != 0) 
@@ -394,8 +393,7 @@ namespace mariadb
 			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
 			msg = msg + "' ";
 			msg = msg + mysql_error((MYSQL*)conn);  
-			core::Error::write(SQLException(msg));
-			return false;
+			throw SQLException(msg); 
 		}
 		rs = (Result)result;   
 		return true;
