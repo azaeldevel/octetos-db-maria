@@ -1,6 +1,6 @@
 
 
-AC_INIT(octetos-db-maria, 1.5.3-alpha,azael.devel@gmail.com)
+AC_INIT(octetos-db-maria, 1.5.4-alpha,azael.devel@gmail.com)
 
 AC_CONFIG_HEADERS([config.h])
 

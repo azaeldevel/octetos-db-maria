@@ -383,6 +383,7 @@ namespace mariadb
 			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
 			msg = msg + "' ";
 			msg = msg + mysql_error((MYSQL*)conn);  
+			msg = msg + " -> " + str;
 			throw SQLException(msg); 
 		}
 		MYSQL_RES *result = mysql_store_result((MYSQL*)conn);
