@@ -1,5 +1,5 @@
 
-#if defined ARCHLINUX
+#if defined LINUX_ARCH
 	#include <mysql/mysql.h>
 #elif defined LINUX_GENTOO
 	#include <mysql/mysql.h>
@@ -352,10 +352,11 @@ namespace mariadb
 	{
 		return execute (str,rs);
 	}		
-	RowNumber Connector::update(const std::string&,db::Datresult&)
+	RowNumber Connector::update(const std::string& str,db::Datresult& rs)
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
-	}		
+        if(execute (str,rs)) return mysql_affected_rows((MYSQL*)conn);
+        return 0;
+	}
 	RowNumber Connector::remove(const std::string&,db::Datresult&)
 	{
 		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
