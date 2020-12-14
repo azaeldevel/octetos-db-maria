@@ -4,26 +4,30 @@
 #include <vector>
 #include <string>
 
-#include "octetos/db/clientdb.hh"
+#if defined WINDOWS_MINGW
+    #include <clientdb.hh>
+#else
+    #include <octetos/core/clientdb.hh>
+#endif
 
 namespace octetos
 {
 namespace db
-{       
-namespace mariadb
-{	
-        
-        class Datconnect : public db::Datconnect
+{
+namespace maria
+{
+
+        class DECLSPCE_DLL Datconnect : public db::Datconnect
         {
-        public:         
+        public:
             Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password);
             Datconnect(const Datconnect& obj);
             const Datconnect& operator=(const Datconnect&);
             ~Datconnect();
             Datconnect();
-        };      
+        };
 
-	class Row
+	class DECLSPCE_DLL Row
 	{
 	private:
 		void* row;
@@ -31,7 +35,7 @@ namespace mariadb
 #ifdef COLLETION_ASSISTANT
 		Row(Datresult* rs,void* row);
 #endif
-		//virtual const char* operator[](unsigned long long index); 
+		//virtual const char* operator[](unsigned long long index);
 		virtual ~Row();
 		Row();
 		Row(void* row);
@@ -65,8 +69,8 @@ namespace mariadb
 		virtual double getdouble(const std::string&)const;
 		virtual std::string getString(const std::string&)const;
 	};
-        
-	class Datresult : public db::Datresult
+
+	class DECLSPCE_DLL Datresult : public db::Datresult
 	{
 	private:
 		Row* actualRow;
@@ -75,7 +79,7 @@ namespace mariadb
 		virtual ~Datresult();
 		Datresult(void* result);
 		Datresult();
-		//virtual db::Row* operator[](unsigned long long index);                
+		//virtual db::Row* operator[](unsigned long long index);
 		//virtual db::Row* next() __attribute__ ((deprecated));
 		virtual bool nextRow();
 		//virtual db::Row* getRow();
@@ -109,8 +113,8 @@ namespace mariadb
 		virtual std::string getString(const std::string&)const;
 		//retrive field meta-data
 	};
-        
-	class Connector : public db::Connector
+
+	class DECLSPCE_DLL Connector : public db::Connector
 	{
 	public:
 		virtual ~Connector();
@@ -120,17 +124,24 @@ namespace mariadb
 		//
 		virtual bool connect(const db::Datconnect& connector);
 		virtual bool execute(const std::string& str,db::Datresult&);
-		virtual RowNumber insert(const std::string&,db::Datresult&);       
+		virtual RowNumber insert(const std::string&,db::Datresult&);
 		virtual bool select(const std::string& str,db::Datresult&);
 		virtual RowNumber update(const std::string&,db::Datresult&);
 		virtual RowNumber remove(const std::string&,db::Datresult&);
 		virtual bool commit();
 		virtual bool begin();
 		virtual bool rollback();
-		virtual void close(); 
-	};      
+		virtual void close();
+	};
+}
+namespace mariadb
+{
+    typedef maria::Datconnect DECLSPCE_DLL Datconnect __attribute__ ((deprecated));
+    typedef maria::Row DECLSPCE_DLL Row __attribute__ ((deprecated));
+    typedef maria::Datresult DECLSPCE_DLL Datresult __attribute__ ((deprecated));
 }
 }
 }
+
 
 #endif

@@ -5,18 +5,28 @@
 	#include <mysql/mysql.h>
 #elif defined LINUX_DEBIAN
 	#include <mariadb/mysql.h>
+#elif defined WINDOWS_MINGW && defined BUILDING_DLL
+    #include <mariadb/mysql.h>
 #else
 	#error "Plataforma desconocida."
 #endif
 
 
 #include <iostream>
-#include <octetos/core/Artifact.hh>
+#if defined WINDOWS_MINGW
+    #include <Artifact.hh>
+#else
+    #include <octetos/core/Artifact.hh>
+#endif
 #include <string.h>
 
 
 #include "clientdb-maria.hh"
-#include "config.h"
+#ifdef HAVE_CONFIG_H
+    #include "config.h"
+#elif defined WINDOWS_MINGW && defined CODEBLOCK
+    #include "config-cb.h"
+#endif
 
 
 
@@ -24,9 +34,9 @@ namespace octetos
 {
 namespace db
 {
-namespace mariadb
-{        
-        
+namespace maria
+{
+
 
 
 
@@ -78,11 +88,11 @@ namespace mariadb
 	{
 		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
 	}
-	std::string Row::getString(const std::string&)const 
-	{ 
+	std::string Row::getString(const std::string&)const
+	{
 		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
 	}
-	
+
 	char Row::getchar(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
@@ -143,7 +153,7 @@ namespace mariadb
 		MYSQL_ROW r = (MYSQL_ROW)row;
 		return r[field] ? std::atoll(r[field]) : 0;
 	}
-	std::string Row::getString(FieldNumber field)const 
+	std::string Row::getString(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
 		return r[field] ? r[field] : "";
@@ -154,23 +164,23 @@ namespace mariadb
 		if(getCountChilds() > 0)
 		{
 			std::cerr << "Una instacia de '" << typeid(*this).name() << "' termino sin que todos sus hijos terminaran primero" << std::endl;
-		}                
+		}
 #endif
 	}
 	Row::Row(const Row& r)
 	{
 		this->row = r.row;
-	}        
+	}
 	Row::Row()
 	{
-		
+
 	}
 	Row::Row(void* row)
 	{
 		this->row = row;
 	}
-        
-        
+
+
 
   	char Datresult::getchar(const std::string&)const
 	{
@@ -220,11 +230,11 @@ namespace mariadb
 	{
 		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
 	}
-	std::string Datresult::getString(const std::string&)const 
-	{ 
+	std::string Datresult::getString(const std::string&)const
+	{
 		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
 	}
-	
+
 	char Datresult::getchar(FieldNumber field)const
 	{
 		return actualRow ? actualRow->getchar(field) : 0;
@@ -273,7 +283,7 @@ namespace mariadb
 	{
 		return actualRow ? ((Row*)actualRow)->getll(field) : 0;
 	}
-	std::string Datresult::getString(FieldNumber field)const 
+	std::string Datresult::getString(FieldNumber field)const
 	{
 		return actualRow ? ((Row*)actualRow)->getString(field) : "";
 	}
@@ -287,11 +297,11 @@ namespace mariadb
 		actualRow = new Row(row);
 #ifdef COLLETION_ASSISTANT
 		addChild(actualRow);
-#endif 		
+#endif
 		if(row) return true;
 		return false;
 	}
-        
+
         Datresult::Datresult(void* result) : db::Datresult(result)
         {
 			actualRow = NULL;
@@ -317,11 +327,11 @@ namespace mariadb
 		}
 #endif
 	}
-        
-        
-        
-        Datconnect::~Datconnect() 
-        {                
+
+
+
+        Datconnect::~Datconnect()
+        {
 #ifdef COLLETION_ASSISTANT
                 if(getCountChilds() > 0)
                 {
@@ -335,27 +345,27 @@ namespace mariadb
         Datconnect::Datconnect(const Datconnect& obj) : db::Datconnect(obj)
         {
         }
-        
+
         const Datconnect& Datconnect::operator=(const Datconnect& obj)
-        {		
+        {
              ((db::Datconnect&)*this)=obj;//llamar el construc de la clase base
              return *this;
         }
-        
+
         Datconnect::Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& user,const std::string& password) : db::Datconnect(Driver::MariaDB,host,port,database,user,password)
         {
         }
-        
-        
+
+
 
 	bool Connector::select(const std::string& str,db::Datresult& rs)
 	{
 		return execute (str,rs);
-	}		
+	}
 	RowNumber Connector::update(const std::string&,db::Datresult&)
 	{
 		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
-	}		
+	}
 	RowNumber Connector::remove(const std::string&,db::Datresult&)
 	{
 		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
@@ -375,50 +385,50 @@ namespace mariadb
 	}
 	bool Connector::execute(const std::string& str,db::Datresult& rs)
 	{
-		if (mysql_query((MYSQL*)conn, str.c_str())  != 0) 
+		if (mysql_query((MYSQL*)conn, str.c_str())  != 0)
 		{
 			std::string msg = "";
 			msg = msg + " MySQL Server Error No. : '";
 			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
 			msg = msg + "' ";
-			msg = msg + mysql_error((MYSQL*)conn);  
-			core::Error::write(SQLException(msg)); 
-			return false;
-		}
-		MYSQL_RES *result = mysql_store_result((MYSQL*)conn);
-		if (result == NULL && mysql_errno((MYSQL*)conn) != 0) 
-		{
-			std::string msg = "";
-			msg = msg + " MySQL Server Error No. : '";
-			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
-			msg = msg + "' ";
-			msg = msg + mysql_error((MYSQL*)conn);  
+			msg = msg + mysql_error((MYSQL*)conn);
 			core::Error::write(SQLException(msg));
 			return false;
 		}
-		rs = (Result)result;   
+		MYSQL_RES *result = mysql_store_result((MYSQL*)conn);
+		if (result == NULL && mysql_errno((MYSQL*)conn) != 0)
+		{
+			std::string msg = "";
+			msg = msg + " MySQL Server Error No. : '";
+			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
+			msg = msg + "' ";
+			msg = msg + mysql_error((MYSQL*)conn);
+			core::Error::write(SQLException(msg));
+			return false;
+		}
+		rs = (Result)result;
 		return true;
 	}
 	core::Semver Connector::getVerionServer() const
 	{
 		core::Semver ver;
 		ver.set(mysql_get_server_version((MYSQL*)conn),core::Semver::ImportCode::MySQL);
-		
+
 		return ver;
 	}
         bool Connector::begin()
         {
-            return false; 
+            return false;
         }
 	void Connector::close()
 	{
-		if (conn) 
+		if (conn)
 		{
 			mysql_close((MYSQL*)conn);
 			conn = NULL;
 			datconn = NULL;
 		}
-	}       
+	}
         bool Connector::rollback()
         {
                 if (conn != NULL)
@@ -428,9 +438,9 @@ namespace mariadb
                         return true;
                         }
                 }
-            
-                return false; 
-        }        
+
+                return false;
+        }
         bool Connector::commit()
         {
             if (conn != NULL)
@@ -440,20 +450,20 @@ namespace mariadb
                     return true;
                 }
             }
-            
-            return false; 
+
+            return false;
         }
 	RowNumber Connector::insert(const std::string& str,db::Datresult&)
 	{
-            if (mysql_query((MYSQL*)conn, str.c_str()) == 0) 
+            if (mysql_query((MYSQL*)conn, str.c_str()) == 0)
             {
                 return mysql_insert_id((MYSQL*)conn);
             }
             else
-            {   
-                return 0; 
-            }		
-	}     
+            {
+                return 0;
+            }
+	}
         /*const char* Connector::serverDescription()
         {
             return mysql_get_client_info();
@@ -467,7 +477,7 @@ namespace mariadb
                 msg = msg + " MariaDB Server Error No. : '";
                 msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
                 msg = msg + "' ";
-                msg = msg + mysql_error((MYSQL*)conn);  
+                msg = msg + mysql_error((MYSQL*)conn);
 				core::Error::write(SQLException(msg));
 				return false;
             }
@@ -480,17 +490,17 @@ namespace mariadb
                 msg = msg + mysql_error((MYSQL*)conn);
 				core::Error::write(SQLException(msg));
 				return false;
-            }        
+            }
             if(mysql_autocommit((MYSQL*)conn,0) != 0)
             {
                 std::string msg = "";
                 msg = msg + " MariaDB Server Error No. : '";
                 msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
                 msg = msg + "' ";
-                msg = msg + mysql_error((MYSQL*)conn);                
+                msg = msg + mysql_error((MYSQL*)conn);
 				core::Error::write(SQLException(msg));
 				return false;
-            }        
+            }
 			datconn = &dtcon;
             return true;
 	}
