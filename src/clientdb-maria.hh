@@ -139,6 +139,7 @@ namespace mariadb
     typedef maria::Datconnect DECLSPCE_DLL Datconnect __attribute__ ((deprecated));
     typedef maria::Row DECLSPCE_DLL Row __attribute__ ((deprecated));
     typedef maria::Datresult DECLSPCE_DLL Datresult __attribute__ ((deprecated));
+    typedef maria::Connector DECLSPCE_DLL Connector __attribute__ ((deprecated));
 }
 }
 }
