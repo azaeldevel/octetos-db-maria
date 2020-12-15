@@ -5,7 +5,6 @@
 #include <string>
 
 
-
 #if defined WINDOWS_MINGW && defined CODEBLOCKS
     #include <clientdb.hh>
 #elif defined LINUX && defined CODEBLOCKS
@@ -18,10 +17,11 @@ namespace octetos
 {
 namespace db
 {
-namespace mariadb
+
+namespace maria
 {
 
-        class Datconnect : public db::Datconnect
+        class DECLSPCE_DLL Datconnect : public db::Datconnect
         {
         public:
             Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password);
@@ -31,7 +31,7 @@ namespace mariadb
             Datconnect();
         };
 
-	class Row
+	class DECLSPCE_DLL Row
 	{
 	private:
 		void* row;
@@ -74,7 +74,8 @@ namespace mariadb
 		virtual std::string getString(const std::string&)const;
 	};
 
-	class Datresult : public db::Datresult
+
+	class DECLSPCE_DLL Datresult : public db::Datresult
 	{
 	private:
 		Row* actualRow;
@@ -118,7 +119,8 @@ namespace mariadb
 		//retrive field meta-data
 	};
 
-	class Connector : public db::Connector
+
+	class DECLSPCE_DLL Connector : public db::Connector
 	{
 	public:
 		virtual ~Connector();
@@ -138,7 +140,15 @@ namespace mariadb
 		virtual void close();
 	};
 }
+namespace mariadb
+{
+    typedef maria::Datconnect DECLSPCE_DLL Datconnect __attribute__ ((deprecated));
+    typedef maria::Row DECLSPCE_DLL Row __attribute__ ((deprecated));
+    typedef maria::Datresult DECLSPCE_DLL Datresult __attribute__ ((deprecated));
+    typedef maria::Connector DECLSPCE_DLL Connector __attribute__ ((deprecated));
 }
 }
+}
+
 
 #endif

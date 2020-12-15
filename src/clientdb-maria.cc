@@ -5,13 +5,19 @@
 	#include <mariadb/mysql.h>
 #elif defined LINUX_DEBIAN
 	#include <mariadb/mysql.h>
+#elif defined WINDOWS_MINGW && defined BUILDING_DLL
+    #include <mariadb/mysql.h>
 #else
 	#error "Plataforma desconocida."
 #endif
 
 
 #include <iostream>
-#include <octetos/core/Artifact.hh>
+#if defined WINDOWS_MINGW
+    #include <Artifact.hh>
+#else
+    #include <octetos/core/Artifact.hh>
+#endif
 #include <string.h>
 
 
@@ -30,7 +36,7 @@ namespace octetos
 {
 namespace db
 {
-namespace mariadb
+namespace maria
 {
 
 
