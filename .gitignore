@@ -16,3 +16,6 @@ install-sh
 ltmain.sh
 missing
 src/Makefile.in
+*.anjuta
+*.depend
+*.layout
