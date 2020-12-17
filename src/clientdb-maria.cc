@@ -391,7 +391,7 @@ namespace maria
 		if (mysql_query((MYSQL*)conn, str.c_str())  != 0)
 		{
 			std::string msg = "";
-			msg = msg + " MySQL Server Error No. : '";
+			msg = msg + "Server Error No. : '";
 			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
 			msg = msg + "' ";
 			msg = msg + mysql_error((MYSQL*)conn);
@@ -402,7 +402,7 @@ namespace maria
 		if (result == NULL && mysql_errno((MYSQL*)conn) != 0)
 		{
 			std::string msg = "";
-			msg = msg + " MySQL Server Error No. : '";
+			msg = msg + "Server Error No. : '";
 			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
 			msg = msg + "' ";
 			msg = msg + mysql_error((MYSQL*)conn);
@@ -458,14 +458,20 @@ namespace maria
         }
 	RowNumber Connector::insert(const std::string& str,db::Datresult&)
 	{
-            if (mysql_query((MYSQL*)conn, str.c_str()) == 0)
-            {
-                return mysql_insert_id((MYSQL*)conn);
-            }
-            else
-            {
-                return 0;
-            }
+		if (mysql_query((MYSQL*)conn, str.c_str()) == 0)
+		{
+			return mysql_insert_id((MYSQL*)conn);
+		}
+		else
+		{
+			std::string msg = "";
+			msg = msg + "Server Error No. : '";
+			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
+			msg = msg + "' ";
+			msg = msg + mysql_error((MYSQL*)conn);
+			msg = msg + " -> " + str;
+			throw SQLException(msg);
+		}
 	}
         /*const char* Connector::serverDescription()
         {
@@ -477,7 +483,7 @@ namespace maria
             if (conn == NULL)
             {
                 std::string msg = "";
-                msg = msg + " MariaDB Server Error No. : '";
+                msg = msg + "Server Error No. : '";
                 msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
                 msg = msg + "' ";
                 msg = msg + mysql_error((MYSQL*)conn);
@@ -487,7 +493,7 @@ namespace maria
             if (mysql_real_connect((MYSQL*)conn, dtcon.getHost().c_str(), dtcon.getUser().c_str(), dtcon.getPassword().c_str(),dtcon.getDatabase().c_str(),dtcon.getPort(), NULL, 0) == NULL)
             {
                 std::string msg = "";
-                msg = msg + " MariaDB Server Error No. : '";
+                msg = msg + " Server Error No. : '";
                 msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
                 msg = msg + "' ";
                 msg = msg + mysql_error((MYSQL*)conn);
@@ -497,7 +503,7 @@ namespace maria
             if(mysql_autocommit((MYSQL*)conn,0) != 0)
             {
                 std::string msg = "";
-                msg = msg + " MariaDB Server Error No. : '";
+                msg = msg + "Server Error No. : '";
                 msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
                 msg = msg + "' ";
                 msg = msg + mysql_error((MYSQL*)conn);
