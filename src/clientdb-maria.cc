@@ -500,7 +500,7 @@ namespace maria
 				core::Error::write(SQLException(msg));
 				return false;
             }
-            if(mysql_autocommit((MYSQL*)conn,0) != 0)
+            if(mysql_autocommit((MYSQL*)conn,1) != 0)
             {
                 std::string msg = "";
                 msg = msg + "Server Error No. : '";
