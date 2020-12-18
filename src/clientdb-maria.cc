@@ -457,6 +457,10 @@ namespace maria
 
             return false;
         }
+	int Connector::affected()
+	{
+		return mysql_affected_rows((MYSQL*)conn);
+	}
 	RowNumber Connector::insert(const std::string& str,db::Datresult&)
 	{
 		if (mysql_query((MYSQL*)conn, str.c_str()) == 0)
@@ -473,6 +477,27 @@ namespace maria
 			msg = msg + " -> " + str;
 			throw SQLException(msg);
 		}
+	}
+	bool Connector::insert2(const std::string& str,db::Datresult&)
+	{
+		if (mysql_query((MYSQL*)conn, str.c_str()) == 0)
+		{
+			return true;
+		}
+		else
+		{
+			std::string msg = "";
+			msg = msg + "Server Error No. : '";
+			msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
+			msg = msg + "' ";
+			msg = msg + mysql_error((MYSQL*)conn);
+			msg = msg + " -> " + str;
+			throw SQLException(msg);
+		}
+	}
+	RowNumber Connector::last_inserted_id()
+	{
+		return mysql_insert_id((MYSQL*)conn);
 	}
         /*const char* Connector::serverDescription()
         {

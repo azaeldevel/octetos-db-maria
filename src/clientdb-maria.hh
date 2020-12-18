@@ -138,6 +138,10 @@ namespace maria
 		virtual bool begin();
 		virtual bool rollback();
 		virtual void close();
+		virtual RowNumber last_inserted_id();
+		virtual bool insert2(const std::string&,db::Datresult&);
+		virtual int affected();
+		
 	};
 }
 namespace mariadb
