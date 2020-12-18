@@ -320,6 +320,11 @@ workaround:
 'configure' Invocation
 ======================
 
+--with-mediumword
+--with-higword
+--with-lowword
+
+
    'configure' recognizes the following options to control how it
 operates.
 

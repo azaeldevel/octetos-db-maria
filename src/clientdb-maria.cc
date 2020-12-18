@@ -365,12 +365,11 @@ namespace maria
 	{
 		return execute (str,rs);
 	}
-	RowNumber Connector::update(const std::string& str,db::Datresult& rs)
+	bool Connector::update(const std::string& str,db::Datresult& rs)
 	{
-        if(execute (str,rs)) return mysql_affected_rows((MYSQL*)conn);
-        return 0;
+        return execute (str,rs);
 	}
-	RowNumber Connector::remove(const std::string&,db::Datresult&)
+	bool Connector::remove(const std::string&,db::Datresult&)
 	{
 		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
 	}
@@ -461,11 +460,11 @@ namespace maria
 	{
 		return mysql_affected_rows((MYSQL*)conn);
 	}
-	RowNumber Connector::insert(const std::string& str,db::Datresult&)
+	bool Connector::insert(const std::string& str,db::Datresult&)
 	{
 		if (mysql_query((MYSQL*)conn, str.c_str()) == 0)
 		{
-			return mysql_insert_id((MYSQL*)conn);
+			return true;
 		}
 		else
 		{
@@ -478,6 +477,7 @@ namespace maria
 			throw SQLException(msg);
 		}
 	}
+	/*
 	bool Connector::insert2(const std::string& str,db::Datresult&)
 	{
 		if (mysql_query((MYSQL*)conn, str.c_str()) == 0)
@@ -495,6 +495,7 @@ namespace maria
 			throw SQLException(msg);
 		}
 	}
+	*/
 	RowNumber Connector::last_inserted_id()
 	{
 		return mysql_insert_id((MYSQL*)conn);
