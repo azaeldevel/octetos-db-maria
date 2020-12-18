@@ -343,6 +343,7 @@ namespace maria
         }
         Datconnect::Datconnect()
         {
+			autocommit = true;
         }
         Datconnect::Datconnect(const Datconnect& obj) : db::Datconnect(obj)
         {
@@ -354,7 +355,7 @@ namespace maria
              return *this;
         }
 
-        Datconnect::Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& user,const std::string& password) : db::Datconnect(Driver::MariaDB,host,port,database,user,password)
+        Datconnect::Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& user,const std::string& password) : db::Datconnect(TypeServer::MariaDB,host,port,database,user,password)
         {
         }
 
@@ -487,8 +488,7 @@ namespace maria
                 msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
                 msg = msg + "' ";
                 msg = msg + mysql_error((MYSQL*)conn);
-				core::Error::write(SQLException(msg));
-				return false;
+				throw SQLException(msg);
             }
             if (mysql_real_connect((MYSQL*)conn, dtcon.getHost().c_str(), dtcon.getUser().c_str(), dtcon.getPassword().c_str(),dtcon.getDatabase().c_str(),dtcon.getPort(), NULL, 0) == NULL)
             {
@@ -497,18 +497,16 @@ namespace maria
                 msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
                 msg = msg + "' ";
                 msg = msg + mysql_error((MYSQL*)conn);
-				core::Error::write(SQLException(msg));
-				return false;
+				throw SQLException(msg);
             }
-            if(mysql_autocommit((MYSQL*)conn,1) != 0)
+            if(mysql_autocommit((MYSQL*)conn,dtcon.getAutocommit()) != 0)
             {
                 std::string msg = "";
                 msg = msg + "Server Error No. : '";
                 msg = msg + std::to_string(mysql_errno((MYSQL*)conn));
                 msg = msg + "' ";
                 msg = msg + mysql_error((MYSQL*)conn);
-				core::Error::write(SQLException(msg));
-				return false;
+				throw SQLException(msg);
             }
 			datconn = &dtcon;
             return true;
