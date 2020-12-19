@@ -1,4 +1,25 @@
 
+/**
+ *
+ *  This file is part of octetos-db-maria.
+ *  octetos-db-maria is an API to access database, MariaDB component.
+ *  Copyright (C) 2018  Azael Reyes
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * */
+
 #if defined LINUX_ARCH
 	#include <mysql/mysql.h>
 #elif defined LINUX_GENTOO
@@ -291,7 +312,7 @@ namespace maria
 	}
 	bool Datresult::nextRow()
 	{
-		MYSQL_ROW row  = mysql_fetch_row((MYSQL_RES*)getResult());
+		MYSQL_ROW row  = mysql_fetch_row((MYSQL_RES*)result);
 		if(actualRow)
 		{
 			delete actualRow;
@@ -320,7 +341,7 @@ namespace maria
 		}
 		if(getResult())
 		{
-			mysql_free_result((MYSQL_RES*)getResult());
+			mysql_free_result((MYSQL_RES*)result);
 		}
 #ifdef COLLETION_ASSISTANT
 		if(getCountChilds() > 0)
@@ -456,7 +477,7 @@ namespace maria
 
             return false;
         }
-	int Connector::affected()
+	int Connector::affected_rows()
 	{
 		return mysql_affected_rows((MYSQL*)conn);
 	}
