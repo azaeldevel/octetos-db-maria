@@ -1,5 +1,5 @@
 
-AC_INIT(octetos-db-maria, 1.9.0-alpha,azael.devel@gmail.com)
+AC_INIT(octetos-db-maria, 1.9.2-alpha,azael.devel@gmail.com)
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -12,13 +12,13 @@ AC_PROG_LIBTOOL
 
 
 AM_CONDITIONAL(WITH_MEDIUMWORD, test x"$with_mediumword" = "xyes")
-AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-mediumword], [Define el tamno de los datos usados.]))
+AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-mediumword], [Define el tamano de los datos usados.]))
 
-AM_CONDITIONAL(WITH_HIGHWORD, test x"$with_mediumword" = "xyes")
-AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-highword], [Define el tamno de los datos usados.]))
+AM_CONDITIONAL(WITH_HIGHWORD, test x"$with_highword" = "xyes")
+AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-highword], [Define el tamano de los datos usados.]))
 
-AM_CONDITIONAL(WITH_LOWWORD, test x"$with_mediumword" = "xyes")
-AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-lowword], [Define el tamno de los datos usados.]))
+AM_CONDITIONAL(WITH_LOWWORD, test x"$with_lowword" = "xyes")
+AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-lowword], [Define el tamano de los datos usados.]))
 
 
 LT_INIT
