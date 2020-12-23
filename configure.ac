@@ -24,15 +24,6 @@ AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-lowword], [Define el tamno de l
 LT_INIT
 
 
-AM_CONDITIONAL(WITH_MEDIUMWORD, test x"$with_mediumword" = "xyes")
-AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-mediumword], [Define el tamno de los datos usados.]))
-
-AM_CONDITIONAL(WITH_HIGHWORD, test x"$with_mediumword" = "xyes")
-AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-highword], [Define el tamno de los datos usados.]))
-
-AM_CONDITIONAL(WITH_LOWWORD, test x"$with_mediumword" = "xyes")
-AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-lowword], [Define el tamno de los datos usados.]))
-
 
 PKG_CHECK_MODULES(OCTETOS_DB_ABSTRACT, octetos-db-abstract)
 

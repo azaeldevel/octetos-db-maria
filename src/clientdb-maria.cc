@@ -59,10 +59,7 @@ namespace db
 {
 namespace maria
 {
-
-
-
-
+	
 	char Row::getchar(const std::string&)const
 	{
 		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
