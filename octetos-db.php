@@ -61,6 +61,10 @@ namespace octetos
 			{
 				return $this->actualRow[$field];
 			}
+			public function getFloat($field)
+			{
+				return $this->actualRow[$field];
+			}
 			
 			public function getNumRow()
 			{
@@ -86,9 +90,9 @@ namespace octetos
 			public function execute($str)
 			{
 				$ret = mysqli_query($this->connection, $str);
-				if (mysqli_connect_errno()) 
+				if(mysqli_connect_errno())
 				{
-					return NULL;
+					return null;
 				}
 				$dr = new Datresult();
 				$dr->setResult($ret);
@@ -96,15 +100,18 @@ namespace octetos
 			}
 			public function update($str,$rs)
 			{
+				//echo "<br>str : " . $str;
 				if(is_null($this->execute($str))) return false;
 				return true;
 			}
 			public function select($str)
 			{
+				//echo "str : " . $str;
 				return $this->execute($str);
 			}
 			public function insert($str,$rs)
 			{
+				//echo "<br>str : " . $str;
 				if(is_null($this->execute($str))) return false;
 				return true;
 			}
@@ -112,6 +119,12 @@ namespace octetos
 			{
 				if(is_null($this->execute($str))) return false;
 				return true;
+			}
+			
+			//mariadb especialist
+			public function inserted_id()
+			{
+				return mysqli_insert_id($this->connection);
 			}
 		}
 	
