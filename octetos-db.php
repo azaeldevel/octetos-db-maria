@@ -122,7 +122,7 @@ namespace octetos
 			}
 			
 			//mariadb especialist
-			public function inserted_id()
+			public function last_inserted_id()
 			{
 				return mysqli_insert_id($this->connection);
 			}
