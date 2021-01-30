@@ -65,6 +65,10 @@ namespace octetos
 			{
 				return $this->actualRow[$field];
 			}
+			public function getInteger($field)
+			{
+				return $this->actualRow[$field];
+			}
 			
 			public function getNumRow()
 			{
@@ -106,8 +110,9 @@ namespace octetos
 			}
 			public function select($str)
 			{
-				//echo "str : " . $str;
+				//echo "<br>Select str : " . $str;
 				return $this->execute($str);
+
 			}
 			public function insert($str,$rs)
 			{
@@ -115,7 +120,7 @@ namespace octetos
 				if(is_null($this->execute($str))) return false;
 				return true;
 			}
-			public function delete($str,$rs)
+			public function remove($str,$rs)
 			{
 				if(is_null($this->execute($str))) return false;
 				return true;

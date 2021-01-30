@@ -387,9 +387,9 @@ namespace maria
 	{
         return execute (str,rs);
 	}
-	bool Connector::remove(const std::string&,db::Datresult&)
+	bool Connector::remove(const std::string& str,db::Datresult& rs)
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		return execute (str,rs);
 	}
     Connector::Connector()
    	{
