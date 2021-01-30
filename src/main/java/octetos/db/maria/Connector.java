@@ -23,14 +23,13 @@ public class Connector implements octetos.db.Connector
         return liID;
     }
     @Override
-    public boolean delete(String str,ResultSet rs) throws SQLException
+    public boolean remove(String str,ResultSet rs) throws SQLException
     {
         Statement stmt = null;
 
         stmt = connection.createStatement();
-        rs = stmt.executeQuery(str);
-        if(rs != null) return true;
-        return false;        
+        stmt.executeUpdate(str);
+        return true;       
     }
     @Override
     public ResultSet select(String str) throws SQLException
