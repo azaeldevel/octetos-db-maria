@@ -61,6 +61,11 @@ namespace octetos
 			{
 				return $this->actualRow[$field];
 			}
+
+			public function get($field)
+			{
+				return $this->actualRow[$field];
+			}
 			public function getFloat($field)
 			{
 				return $this->actualRow[$field];
@@ -84,7 +89,7 @@ namespace octetos
 			public function connect($datconn)
 			{
 				$this->connection = mysqli_connect($datconn->getHost(),$datconn->getUser(), $datconn->getPassword(), $datconn->getDatabase());
-				
+				mysqli_autocommit($this->connection,FALSE);
 				if (mysqli_connect_errno()) return false;
 				return true;
 			}
@@ -110,7 +115,7 @@ namespace octetos
 			}
 			public function select($str)
 			{
-				//echo "<br>Select str : " . $str;
+				//echo "<br>Select str : " . $str . "<br>";
 				return $this->execute($str);
 
 			}
@@ -130,6 +135,14 @@ namespace octetos
 			public function last_inserted_id()
 			{
 				return mysqli_insert_id($this->connection);
+			}
+			public function commit()
+			{
+				mysqli_commit($this->connection);
+			}
+			public function rollback()
+			{
+				mysqli_rollback($this->connection);
 			}
 		}
 	

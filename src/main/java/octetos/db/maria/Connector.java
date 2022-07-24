@@ -94,7 +94,17 @@ public class Connector implements octetos.db.Connector
     public boolean connect(octetos.db.Datconnect dat) throws SQLException
     {
         connection = DriverManager.getConnection("jdbc:mysql://" + dat.getHost()  + ":" + dat.getPort() + "/" + dat.getDatabase(),dat.getUser(),dat.getPassword());
+        connection.setAutoCommit(false);
         
         return connection.isValid(50000);
+    }
+    
+    public void commit() throws SQLException
+    {
+        connection.commit();
+    }
+    public void rollback() throws SQLException
+    {
+        connection.rollback();
     }
 }

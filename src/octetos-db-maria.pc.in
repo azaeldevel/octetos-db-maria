@@ -10,4 +10,4 @@ Description: C++ library for Database Access, MariaDB component.
 Version: @VERSION@
 Requires: octetos-db-abstract
 Libs: -L${libdir} -loctetos-db-maria
-Cflags: -I${includedir}
+Cflags: -I${includedir} 

@@ -25,6 +25,22 @@
 #include <vector>
 #include <string>
 
+#if EXPORTING_OCTETOS_DB_MARIA_DLL
+	#if _MSC_VER
+		#define OCTETOS_DB_MARIA_DECLSPCE_DLL __declspec(dllexport)
+	#elif __GNUG__
+		
+	#endif
+#elif IMPORTING_OCTETOS_DB_MARIA_DLL
+	#if _MSC_VER
+		#define OCTETOS_DB_MARIA_DECLSPCE_DLL __declspec(dllimport)
+	#elif __GNUG__
+		
+	#endif
+#else
+	#define OCTETOS_DB_MARIA_DECLSPCE_DLL
+#endif
+
 
 #if defined WINDOWS_MINGW && defined CODEBLOCKS
     #include <clientdb.hh>
@@ -41,7 +57,7 @@ namespace db
 namespace maria
 {
 
-        class DECLSPCE_DLL Datconnect : public db::Datconnect
+        class OCTETOS_DB_MARIA_DECLSPCE_DLL Datconnect : public db::Datconnect
         {
         public:
             Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password);
@@ -51,7 +67,7 @@ namespace maria
             Datconnect();
         };
 
-	class DECLSPCE_DLL Row
+	class OCTETOS_DB_MARIA_DECLSPCE_DLL Row
 	{
 	private:
 		void* row;
@@ -95,7 +111,7 @@ namespace maria
 	};
 
 
-	class DECLSPCE_DLL Datresult : public db::Datresult
+	class OCTETOS_DB_MARIA_DECLSPCE_DLL Datresult : public db::Datresult
 	{
 	private:
 		Row* actualRow;
@@ -140,7 +156,7 @@ namespace maria
 	};
 
 
-	class DECLSPCE_DLL Connector : public db::Connector
+	class OCTETOS_DB_MARIA_DECLSPCE_DLL Connector : public db::Connector
 	{
 	public:
 		virtual ~Connector();
@@ -166,10 +182,10 @@ namespace maria
 }
 namespace mariadb
 {
-    typedef maria::Datconnect DECLSPCE_DLL Datconnect __attribute__ ((deprecated));
-    typedef maria::Row DECLSPCE_DLL Row __attribute__ ((deprecated));
-    typedef maria::Datresult DECLSPCE_DLL Datresult __attribute__ ((deprecated));
-    typedef maria::Connector DECLSPCE_DLL Connector __attribute__ ((deprecated));
+    typedef maria::Datconnect OCTETOS_DB_MARIA_DECLSPCE_DLL Datconnect __attribute__ ((deprecated));
+    typedef maria::Row OCTETOS_DB_MARIA_DECLSPCE_DLL Row __attribute__ ((deprecated));
+    typedef maria::Datresult OCTETOS_DB_MARIA_DECLSPCE_DLL Datresult __attribute__ ((deprecated));
+    typedef maria::Connector OCTETOS_DB_MARIA_DECLSPCE_DLL Connector __attribute__ ((deprecated));
 }
 }
 }
