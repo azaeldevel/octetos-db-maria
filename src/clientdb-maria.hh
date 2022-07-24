@@ -180,6 +180,7 @@ namespace maria
 		
 	};
 }
+
 namespace mariadb
 {
     typedef maria::Datconnect OCTETOS_DB_MARIA_DECLSPCE_DLL Datconnect __attribute__ ((deprecated));
@@ -187,6 +188,7 @@ namespace mariadb
     typedef maria::Datresult OCTETOS_DB_MARIA_DECLSPCE_DLL Datresult __attribute__ ((deprecated));
     typedef maria::Connector OCTETOS_DB_MARIA_DECLSPCE_DLL Connector __attribute__ ((deprecated));
 }
+
 }
 }
 
