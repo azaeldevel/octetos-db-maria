@@ -57,15 +57,15 @@ namespace db
 namespace maria
 {
 
-        class OCTETOS_DB_MARIA_DECLSPCE_DLL Datconnect : public db::Datconnect
-        {
-        public:
-            Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password);
-            Datconnect(const Datconnect& obj);
-            const Datconnect& operator=(const Datconnect&);
-            ~Datconnect();
-            Datconnect();
-        };
+	class OCTETOS_DB_MARIA_DECLSPCE_DLL Datconnect : public db::Datconnect
+   	{
+   	public:
+     	Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password);
+    	Datconnect(const Datconnect& obj);
+     	const Datconnect& operator=(const Datconnect&);
+       	~Datconnect();
+     	Datconnect();
+	};
 
 	class OCTETOS_DB_MARIA_DECLSPCE_DLL Row
 	{
