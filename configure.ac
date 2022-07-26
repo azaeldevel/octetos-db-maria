@@ -1,5 +1,5 @@
 
-AC_INIT(octetos-db-maria, 1.10.1-alpha,azael.devel@gmail.com)
+AC_INIT(octetos-db-maria, 1.10.3-alpha,azael.devel@gmail.com)
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.11])
