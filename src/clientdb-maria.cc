@@ -62,55 +62,55 @@ namespace maria
 	
 	char Row::getchar(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned char Row::getuchar(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	short Row::getshort(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned short Row::getushort(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned int Row::getuint(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned long Row::getul(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned long long Row::getull(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	float Row::getfloat(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	double Row::getdouble(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	int Row::getint(const std::string&) const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	long Row::getl(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	long long Row::getll(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	std::string Row::getString(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 
 	char Row::getchar(FieldNumber field)const
@@ -204,55 +204,55 @@ namespace maria
 
   	char Datresult::getchar(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned char Datresult::getuchar(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	short Datresult::getshort(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned short Datresult::getushort(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned int Datresult::getuint(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned long Datresult::getul(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	unsigned long long Datresult::getull(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	float Datresult::getfloat(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	double Datresult::getdouble(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	int Datresult::getint(const std::string&) const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	long Datresult::getl(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	long long Datresult::getll(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 	std::string Datresult::getString(const std::string&)const
 	{
-		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica.");
+		throw NotSupportedExcetion("Aun se trabaja en esta cracteristica(mariadb).");
 	}
 
 	char Datresult::getchar(FieldNumber field)const
