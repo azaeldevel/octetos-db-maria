@@ -379,6 +379,19 @@ namespace maria
 
 
 
+
+
+    Connector::Connector()
+   	{
+		conn = NULL;
+	}
+	Connector::~Connector()
+	{
+		if(conn) 
+		{
+			mysql_close((MYSQL*)conn);
+		}
+	}
 	bool Connector::select(const std::string& str,db::Datresult& rs)
 	{
 		return execute (str,rs);
@@ -390,19 +403,6 @@ namespace maria
 	bool Connector::remove(const std::string& str,db::Datresult& rs)
 	{
 		return execute (str,rs);
-	}
-    Connector::Connector()
-   	{
-	}
-	Connector::~Connector()
-	{
-		close();
-#ifdef COLLETION_ASSISTANT
-		if(getCountChilds() > 0)
-		{
-			std::cerr << "Una instacia de '" << typeid(*this).name() << "' termino sin que todos sus hijos terminaran primero" << std::endl;
-		}
-#endif
 	}
 	bool Connector::execute(const std::string& str,db::Datresult& rs)
 	{
@@ -441,13 +441,13 @@ namespace maria
         {
             return false;
         }
+	
 	void Connector::close()
 	{
-		if (conn)
+		if(conn) 
 		{
 			mysql_close((MYSQL*)conn);
 			conn = NULL;
-			datconn = NULL;
 		}
 	}
         bool Connector::rollback()

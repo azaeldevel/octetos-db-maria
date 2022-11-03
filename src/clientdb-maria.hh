@@ -159,8 +159,8 @@ namespace maria
 	class OCTETOS_DB_MARIA_DECLSPCE_DLL Connector : public db::Connector
 	{
 	public:
-		virtual ~Connector();
 		Connector();
+		virtual ~Connector();
 		const char* serverDescription();
 		virtual core::Semver getVerionServer() const;
 		//
