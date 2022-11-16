@@ -83,6 +83,7 @@ namespace maria
 		//retrive data field by index
 		virtual char getchar(FieldNumber field)const;
 		virtual unsigned char getuchar(FieldNumber field)const;
+		virtual signed char getschar(FieldNumber field)const;
 		virtual short getshort(FieldNumber field)const;
 		virtual unsigned short getushort(FieldNumber field)const;
 		virtual int getint(FieldNumber field)const;
@@ -127,6 +128,7 @@ namespace maria
 		//retrive data field by index
 		virtual char getchar(FieldNumber field)const;
 		virtual unsigned char getuchar(FieldNumber field)const;
+		virtual signed char getschar(FieldNumber field)const;
 		virtual short getshort(FieldNumber field)const;
 		virtual unsigned short getushort(FieldNumber field)const;
 		virtual int getint(FieldNumber field)const;

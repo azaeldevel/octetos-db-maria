@@ -116,22 +116,27 @@ namespace maria
 	char Row::getchar(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
-		return r[field] ? r[field][0] : 0;
+		return r[field] ? (char)std::stoi(r[field]) : 0;
 	}
 	unsigned char Row::getuchar(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
-		return r[field] ? (unsigned char)r[field][0] : '\0';
+		return r[field] ? (unsigned char)std::stoul(r[field]) : 0;
+	}
+	signed char Row::getschar(FieldNumber field)const
+	{
+		MYSQL_ROW r = (MYSQL_ROW)row;
+		return r[field] ? (signed char)std::stoi(r[field]) : 0;
 	}
 	short Row::getshort(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
-		return r[field] ? (short)std::stoi(r[field]) : '\0';
+		return r[field] ? (short) std::stoi(r[field]) : 0;
 	}
 	unsigned short Row::getushort(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
-		return r[field] ? (unsigned short)std::stoul(r[field]) : 0;
+		return r[field] ? (unsigned short) std::stoul(r[field]) : 0;
 	}
 	unsigned int Row::getuint(FieldNumber field)const
 	{
@@ -262,6 +267,10 @@ namespace maria
 	unsigned char Datresult::getuchar(FieldNumber field)const
 	{
 		return actualRow ? actualRow->getuchar(field) : 0;
+	}
+	signed char Datresult::getschar(FieldNumber field)const
+	{
+		return actualRow ? actualRow->getschar(field) : 0;
 	}
 	short Datresult::getshort(FieldNumber field)const
 	{
