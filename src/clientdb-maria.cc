@@ -1,4 +1,9 @@
 
+#include "clientdb-maria.hh"
+
+#include <iostream>
+#include <string.h>
+
 #if defined LINUX_ARCH
 	#include <mysql/mysql.h>
 #elif defined LINUX_GENTOO
@@ -10,27 +15,15 @@
 #else
 	#error "Plataforma desconocida."
 #endif
-
-
-#include <iostream>
-#if defined WINDOWS_MINGW
+#if defined(__linux__)
+    #include "config.h"
+    #include <octetos/core/Artifact.hh>
+#elif defined(_WIN32) || defined(_WIN64)
+    #include "config-cb.h"
     #include <Artifact.hh>
 #else
-    #include <octetos/core/Artifact.hh>
+    #error "Plataforma desconocida"
 #endif
-#include <string.h>
-
-
-#include "clientdb-maria.hh"
-#ifdef HAVE_CONFIG_H
-    #include "config.h"
-#elif defined WINDOWS_MINGW && defined CODEBLOCKS
-    #include "config-cb.h"
-#elif defined LINUX && defined CODEBLOCKS
-    #include "config-cb.h"
-#endif
-
-
 
 namespace octetos
 {
@@ -476,6 +469,8 @@ namespace maria
 			msg = msg + " -> " + str;
 			throw SQLException(msg);
 		}
+
+		return false;
 	}
 	/*
 	bool Connector::insert2(const std::string& str,db::Datresult&)

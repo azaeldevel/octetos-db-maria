@@ -3,14 +3,12 @@
 
 #include <vector>
 #include <string>
-
-
-#if defined WINDOWS_MINGW && defined CODEBLOCKS
-    #include <clientdb.hh>
-#elif defined LINUX && defined CODEBLOCKS
+#if defined(__linux__)
+    #include <octetos/db/clientdb.hh>
+#elif defined(_WIN32) || defined(_WIN64)
     #include <clientdb.hh>
 #else
-    #include <octetos/db/clientdb.hh>
+    #error "Plataforma desconocida"
 #endif
 
 namespace octetos
@@ -20,7 +18,7 @@ namespace db
 namespace maria
 {
 
-        class DECLSPCE_DLL Datconnect : public db::Datconnect
+        class Datconnect : public db::Datconnect
         {
         public:
             Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password);
@@ -30,7 +28,7 @@ namespace maria
             Datconnect();
         };
 
-	class DECLSPCE_DLL Row
+	class  Row
 	{
 	private:
 		void* row;
@@ -74,7 +72,7 @@ namespace maria
 	};
 
 
-	class DECLSPCE_DLL Datresult : public db::Datresult
+	class Datresult : public db::Datresult
 	{
 	private:
 		Row* actualRow;
@@ -119,7 +117,7 @@ namespace maria
 	};
 
 
-	class DECLSPCE_DLL Connector : public db::Connector
+	class Connector : public db::Connector
 	{
 	public:
 		virtual ~Connector();
@@ -140,15 +138,15 @@ namespace maria
 		virtual RowNumber last_inserted_id();
 		//virtual bool insert2(const std::string&,db::Datresult&);
 		virtual int affected();
-		
+
 	};
 }
 namespace mariadb
 {
-    typedef maria::Datconnect DECLSPCE_DLL Datconnect __attribute__ ((deprecated));
-    typedef maria::Row DECLSPCE_DLL Row __attribute__ ((deprecated));
-    typedef maria::Datresult DECLSPCE_DLL Datresult __attribute__ ((deprecated));
-    typedef maria::Connector DECLSPCE_DLL Connector __attribute__ ((deprecated));
+    typedef maria::Datconnect Datconnect __attribute__ ((deprecated));
+    typedef maria::Row Row __attribute__ ((deprecated));
+    typedef maria::Datresult Datresult __attribute__ ((deprecated));
+    typedef maria::Connector Connector __attribute__ ((deprecated));
 }
 }
 }
