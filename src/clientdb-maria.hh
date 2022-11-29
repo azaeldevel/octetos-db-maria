@@ -19,8 +19,8 @@
  *
  * */
 
-#ifndef OCTETOS_MARIADB_HH
-#define OCTETOS_MARIADB_HH
+#ifndef OCTETOS_DB_MARIADB_HH
+#define OCTETOS_DB_MARIADB_HH
 
 #include <vector>
 #include <string>
@@ -30,13 +30,13 @@
 	#if _MSC_VER
 		#define OCTETOS_DB_MARIA_DECLSPCE_DLL __declspec(dllexport)
 	#elif __GNUG__
-		
+
 	#endif
 #elif IMPORTING_OCTETOS_DB_MARIA_DLL
 	#if _MSC_VER
 		#define OCTETOS_DB_MARIA_DECLSPCE_DLL __declspec(dllimport)
 	#elif __GNUG__
-		
+
 	#endif
 #else
 	#define OCTETOS_DB_MARIA_DECLSPCE_DLL
@@ -46,7 +46,6 @@
 #if defined WINDOWS_MINGW && defined CODEBLOCKS
     #include <clientdb.hh>
 #elif defined LINUX && defined CODEBLOCKS
-
     #include <clientdb.hh>
 #else
     #error "Plataforma desconocida"
