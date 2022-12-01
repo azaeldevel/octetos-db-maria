@@ -43,9 +43,10 @@
 #endif
 
 
-#if defined WINDOWS_MINGW && defined CODEBLOCKS
-    #include <clientdb.hh>
-#elif defined LINUX && defined CODEBLOCKS
+
+#if defined(__linux__)
+    #include <octetos/db/clientdb.hh>
+#elif defined(_WIN32) || defined(_WIN64)
     #include <clientdb.hh>
 #else
     #error "Plataforma desconocida"

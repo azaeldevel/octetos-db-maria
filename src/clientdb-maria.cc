@@ -12,9 +12,12 @@
 	#include <mariadb/mysql.h>
 #elif defined WINDOWS_MINGW && defined BUILDING_DLL
     #include <mariadb/mysql.h>
+#elif MSYS2
+    #include <mariadb/mysql.h>
 #else
 	#error "Plataforma desconocida."
 #endif
+
 #if defined(__linux__)
     #include "config.h"
     #include <octetos/core/Artifact.hh>
@@ -93,15 +96,22 @@ namespace maria
 		MYSQL_ROW r = (MYSQL_ROW)row;
 		return r[field] ? r[field][0] : 0;
 	}
+	signed char Row::getschar(FieldNumber field)const
+	{
+		MYSQL_ROW r = (MYSQL_ROW)row;
+		if(strlen(r[field]) > 0) (signed char)std::stoi(r[field]);
+		return 0;
+	}
 	unsigned char Row::getuchar(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
-		return r[field] ? (unsigned char)r[field][0] : '\0';
+		if(strlen(r[field]) > 0) (unsigned char)std::stoul(r[field]);
+		return 0;
 	}
 	short Row::getshort(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
-		return r[field] ? (short)std::stoi(r[field]) : '\0';
+		return r[field] ? (short)std::stoi(r[field]) : 0;
 	}
 	unsigned short Row::getushort(FieldNumber field)const
 	{
@@ -237,6 +247,10 @@ namespace maria
 	unsigned char Datresult::getuchar(FieldNumber field)const
 	{
 		return actualRow ? actualRow->getuchar(field) : 0;
+	}
+	signed char Datresult::getschar(FieldNumber field)const
+	{
+		return actualRow ? actualRow->getschar(field) : 0;
 	}
 	short Datresult::getshort(FieldNumber field)const
 	{
