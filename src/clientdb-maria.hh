@@ -46,6 +46,8 @@
 
 #if defined(__linux__)
     #include <octetos/db/clientdb.hh>
+#elif MSYS2
+    #include <db-abstract/src/clientdb.hh>
 #elif defined(_WIN32) || defined(_WIN64)
     #include <clientdb.hh>
 #else

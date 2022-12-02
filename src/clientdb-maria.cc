@@ -21,6 +21,9 @@
 #if defined(__linux__)
     #include "config.h"
     #include <octetos/core/Artifact.hh>
+#elif MSYS2
+    #include "config-cb.h"
+    #include <core/src/Artifact.hh>
 #elif defined(_WIN32) || defined(_WIN64)
     #include "config-cb.h"
     #include <Artifact.hh>
