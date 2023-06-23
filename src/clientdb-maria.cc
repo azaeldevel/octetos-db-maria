@@ -18,8 +18,8 @@
 	#error "Plataforma desconocida."
 #endif
 
-#if defined(__linux__)
-    #include "config.h"
+#if defined(CODEBLOCKS) && defined(__linux__)
+    //#include "config.h"
     #include <octetos/core/Artifact.hh>
 #elif MSYS2
     #include "config-cb.h"
@@ -27,6 +27,9 @@
 #elif defined(_WIN32) || defined(_WIN64)
     #include "config-cb.h"
     #include <Artifact.hh>
+#elif defined(__linux__)
+    #include "config-cb.h"
+    #include <core/src/Artifact.hh>
 #else
     #error "Plataforma desconocida"
 #endif
@@ -102,13 +105,13 @@ namespace maria
 	signed char Row::getschar(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
-		if(strlen(r[field]) > 0) (signed char)std::stoi(r[field]);
+		if(strlen(r[field]) > 0) return (signed char)std::stoi(r[field]);
 		return 0;
 	}
 	unsigned char Row::getuchar(FieldNumber field)const
 	{
 		MYSQL_ROW r = (MYSQL_ROW)row;
-		if(strlen(r[field]) > 0) (unsigned char)std::stoul(r[field]);
+		if(strlen(r[field]) > 0) return (unsigned char)std::stoul(r[field]);
 		return 0;
 	}
 	short Row::getshort(FieldNumber field)const
